@@ -49,4 +49,14 @@ contract MailDelivery {
         allMail[mailId].deliveryStatus = DeliveryStatus.ERROR;
         newLocationReport(mailId, currentAddress);
     }
+
+    // Get location report at inputted index
+    function getLocationReport(uint mailId, uint index) public view returns (bytes32 currentAddress, uint timestamp) {
+        currentAddress = locationReports[mailId][index].currentAddress;
+        timestamp = locationReports[mailId][index].timestamp;
+    }
+
+    function getNumLocationReports(uint mailId) public view returns (uint) {
+        return locationReports[mailId].length;
+    }
 }
