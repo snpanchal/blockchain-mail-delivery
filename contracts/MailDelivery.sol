@@ -50,12 +50,21 @@ contract MailDelivery {
         newLocationReport(mailId, currentAddress);
     }
 
+    // Return details of mail given mail ID
+    function getMailInfo(uint mailId) public view returns (MailType mailType, bytes32 sender, bytes32 recipient, DeliveryStatus deliveryStatus) {
+        mailType = allMail[mailId].mailType;
+        sender = allMail[mailId].sender;
+        recipient = allMail[mailId].recipient;
+        deliveryStatus = allMail[mailId].deliveryStatus;
+    }
+
     // Get location report at inputted index
     function getLocationReport(uint mailId, uint index) public view returns (bytes32 currentAddress, uint timestamp) {
         currentAddress = locationReports[mailId][index].currentAddress;
         timestamp = locationReports[mailId][index].timestamp;
     }
 
+    // Return number of location reports for specific mail ID
     function getNumLocationReports(uint mailId) public view returns (uint) {
         return locationReports[mailId].length;
     }
